@@ -1,5 +1,12 @@
 FROM python:3.10-slim-buster
 
-RUN echo "print('hello!')" > /say_hello.py
+WORKDIR /src
 
-ENTRYPOINT python /say_hello.py
+COPY ./app/requirements.txt requirements.txt
+
+RUN pip install -r requirements.txt
+
+COPY ./app .
+
+CMD python app.py
+
